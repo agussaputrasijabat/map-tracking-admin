@@ -11,7 +11,7 @@ function RenderMarkers(device_id) {
             markers.clearLayers();
 
             res.locations.forEach(location => {
-                var title = `Lokasi: ${location.name}` + (location.location_id == res.device.location_id ? `<br/>Kendaraan: ${res.device.name}<br/>Tanggal: ${res.device.updated_at}` : '');
+                var title = `<strong>${location.name}</strong>` + (location.location_id == res.device.location_id ? `<br/>Kendaraan: ${res.device.name}<br/>Tanggal: ${res.device.updated_at}` : '');
                 AddMarker(location.latitude, location.longitude, title);
 
                 if (location.location_id == res.device.location_id) {

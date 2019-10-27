@@ -24,7 +24,7 @@ $location = $queryStatement->fetch_object();
         </button>
     </div>
     <div class="modal-body">
-        <form id="form-edit-location" action="modules/location/edit.php" method="post">
+        <form id="form-edit-location" action="modules/location/edit.php" method="post" autocomplete="off">
             <input type="hidden" name="location_id" value="<?= $location->location_id ?>" />
             <div class="form-group">
                 <label for="exampleInputEmail1">Unique ID</label>

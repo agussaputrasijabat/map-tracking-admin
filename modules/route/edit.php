@@ -32,7 +32,7 @@ LEFT JOIN devices ON  devices.device_id=routes.device_id WHERE routes.route_id=$
         </button>
     </div>
     <div class="modal-body">
-        <form id="form-edit-route" action="modules/route/edit.php" method="post">
+        <form id="form-edit-route" action="modules/route/edit.php" method="post" autocomplete="off">
             <input type="hidden" name="route_id" value="<?= $route->route_id ?>" />
             <div class="form-group">
                 <label for="exampleInputEmail1">Kendaraan</label>

@@ -24,7 +24,7 @@ $device = $queryStatement->fetch_object();
         </button>
     </div>
     <div class="modal-body">
-        <form id="form-edit-device" action="modules/device/edit.php" method="post">
+        <form id="form-edit-device" action="modules/device/edit.php" method="post" autocomplete="off">
             <input type="hidden" name="device_id" value="<?= $device->device_id ?>" />
             <div class="form-group">
                 <label for="exampleInputEmail1">RFID</label>
@@ -35,7 +35,7 @@ $device = $queryStatement->fetch_object();
                 <input type="text" class="form-control" id="name" name="name" value="<?= $device->name ?>">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Balance</label>
+                <label for="exampleInputEmail1">Saldo</label>
                 <input type="number" step="any" class="form-control" id="balance" name="balance" value="<?= $device->balance ?>">
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>

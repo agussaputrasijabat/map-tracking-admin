@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
     </div>
     <div class="modal-body">
-        <form id="form-add-location" action="modules/location/add.php" method="post">
+        <form id="form-add-location" action="modules/location/add.php" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="exampleInputEmail1">Unique ID</label>
                 <input type="text" class="form-control" id="unique_id" name="unique_id">

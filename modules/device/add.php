@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </button>
     </div>
     <div class="modal-body">
-        <form id="form-add-device" action="modules/device/add.php" method="post">
+        <form id="form-add-device" action="modules/device/add.php" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="exampleInputEmail1">RFID</label>
                 <input type="text" class="form-control" id="rfid" name="rfid">
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Balance</label>
+                <label for="exampleInputEmail1">Saldo</label>
                 <input type="number" step="any" class="form-control" id="balance" name="balance">
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
