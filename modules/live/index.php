@@ -1,6 +1,6 @@
 <?php
 $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS device_name, locations.location_id, locations.name AS location_name FROM devices
-    INNER JOIN locations ON devices.location_id=locations.location_id");
+    LEFT JOIN locations ON devices.location_id=locations.location_id");
 
 ?>
 
