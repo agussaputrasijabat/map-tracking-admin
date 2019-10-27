@@ -1,27 +1,25 @@
-function AddMarker(lat, lon, icon) {
-    var size = new OpenLayers.Size(40, 40);
-    var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+function AddMarker(lat, lon, title) {
 
-    var location = new OpenLayers.LonLat(lon, lat).transform(
-        new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
-        map.getProjectionObject() // to Spherical Mercator Projection
-    );
+    var marker = L.marker([lat, lon]).addTo(map).bindPopup(title, { autoClose: false, closeOnClick: false }).openPopup();
 
-    markers.addMarker(new OpenLayers.Marker(location,
-        new OpenLayers.Icon('assets/img/marker_' + icon + '.png', size, offset)
-    ));
+    markers.addLayer(marker);
 }
 
 function RenderMarkers(device_id) {
     $.get('modules/live/getData.php?device_id=' + device_id, function (res) {
-        markers.clearMarkers();
+        if (JSON.stringify(tracking_data) != JSON.stringify(res)) {
+            markers.clearLayers();
 
-        while (map.popups.length) {
-            map.removePopup(map.popups[0]);
+            res.locations.forEach(location => {
+                var title = `Lokasi: ${location.name}` + (location.location_id == res.device.location_id ? `<br/>Kendaraan: ${res.device.name}<br/>Tanggal: ${res.device.updated_at}` : '');
+                AddMarker(location.latitude, location.longitude, title);
+
+                if (location.location_id == res.device.location_id) {
+                    map.setView(new L.LatLng(location.latitude, location.longitude), 13);
+                }
+            });
+
+            tracking_data = res;
         }
-
-        res.locations.forEach(location => {
-            AddMarker(location.latitude, location.longitude, (location.location_id == res.device.location_id ? 'red' : 'road'));
-        });
     });
 }
