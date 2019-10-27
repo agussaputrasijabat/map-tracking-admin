@@ -1,6 +1,6 @@
 function AddMarker(lat, lon, title) {
 
-    var marker = L.marker([lat, lon]).addTo(map).bindPopup(title, { autoClose: false, closeOnClick: false }).openPopup();
+    var marker = L.marker([lat, lon], {icon: roadIcon}).addTo(map).bindPopup(title, { autoClose: false, closeOnClick: false }).openPopup();
 
     markers.addLayer(marker);
 }

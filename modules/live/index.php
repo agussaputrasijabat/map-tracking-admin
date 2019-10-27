@@ -45,6 +45,18 @@ $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS devi
             attribution: '&copy; 5 Orang Pendekar Pelita Indonesia'
         }).addTo(map);
 
+        L.icon = function(options) {
+            return new L.Icon(options);
+        };
+
+        var roadIcon = L.icon({
+            iconUrl: 'assets/img/marker_road.png',
+            iconSize: [40, 40], // size of the icon
+            shadowSize: [40, 40], // size of the shadow
+            iconAnchor: [40, 40], // point of the icon which will correspond to marker's location
+            popupAnchor: [-27, -40] // point from which the popup should open relative to the iconAnchor
+        });
+
         var markers = L.layerGroup().addTo(map);
 
         // Device click
@@ -71,10 +83,10 @@ $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS devi
                             $('.device-' + device.device_id).html(device.name);
                         } else {
 
-                            var message = `Kendaraan ${device.name} telah melarikan diri!`;
+                            var message = `Kendaraan ${device.name} telah keluar dari rute yang ditetapkan! Lokasi saat ini: ${device.location.name}`;
                             $('.device-' + device.device_id).html(`${device.name} <span class="badge badge-danger float-right blink" title="${message}" onclick="alert('${message}')">Peringatan!</span>`);
 
-                            //warningPlayer.play();
+                            warningPlayer.play();
                             hasWarning = true;
                         }
                     }

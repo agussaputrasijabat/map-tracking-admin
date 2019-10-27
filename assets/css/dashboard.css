@@ -107,9 +107,8 @@ body {
 
 #mapdiv, #mapid {
   width: 100%!important;
-  height: 100%!important;
+  height: 78vh!important;
   min-height: 650px!important;
-  
 }
 
 .blink {
