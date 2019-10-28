@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="modal-body">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-6">
                 <form id="form-add-location" action="modules/location/add.php" method="post" autocomplete="off">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Unique ID</label>
@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
             </div>
-            <div class="col-sm-6">
-                <div id="MapLocation" style="height: 350px;width:350px;"></div>
+            <div class="col-6">
+                <div id="MapLocation" style="height: 350px;"></div>
             </div>
         </div>
     </div>
@@ -59,36 +59,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     })
 
-    var curLocation = [0.4654061, 101.4522179];
+    $(document).ready(function() {
+        var map = L.map('MapLocation').setView(new L.LatLng(0.474736, 101.4405126), 13);
 
-    var map = L.map('MapLocation').setView(new L.LatLng(0.4654061, 101.4522179), 13);
+        L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+            attribution: '&copy; 5 Orang Pendekar Dari Pelita Indonesia'
+        }).addTo(map);
 
-    L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-        attribution: '&copy; 5 Orang Pendekar Dari Pelita Indonesia'
-    }).addTo(map);
+        map.attributionControl.setPrefix(false);
 
-    map.attributionControl.setPrefix(false);
-
-    var marker = new L.marker(new L.LatLng(0.4654061, 101.4522179), {
-        draggable: 'true'
-    });
-
-    marker.on('dragend', function(event) {
-        var position = marker.getLatLng();
-        marker.setLatLng(position, {
+        var marker = new L.marker(new L.LatLng(0.474736, 101.4405126), {
             draggable: 'true'
-        }).bindPopup(position).update();
-        $("#latitude").val(position.lat);
-        $("#longitude").val(position.lng).keyup();
-    });
+        });
 
-    $("#latitude, #longitude").change(function() {
-        var position = [parseInt($("#latitude").val()), parseInt($("#longitude").val())];
-        marker.setLatLng(position, {
-            draggable: 'true'
-        }).bindPopup(position).update();
-        map.panTo(position);
-    });
+        marker.on('dragend', function(event) {
+            var position = marker.getLatLng();
+            marker.setLatLng(position, {
+                draggable: 'true'
+            }).bindPopup(position).update();
+            $("#latitude").val(position.lat);
+            $("#longitude").val(position.lng).keyup();
+        });
 
-    map.addLayer(marker);
+        $("#latitude, #longitude").change(function() {
+            var position = [parseFloat($("#latitude").val()), parseFloat($("#longitude").val())];
+            marker.setLatLng(position, {
+                draggable: 'true'
+            }).bindPopup(position).update();
+
+            setTimeout(function() {
+                map.setView(new L.LatLng(position[0], position[1]), 13, {
+                    animation: true
+                });
+            }, 500);
+        });
+
+        setTimeout(function() {
+            map.invalidateSize();
+            map.addLayer(marker);
+        }, 500);
+    });
 </script>

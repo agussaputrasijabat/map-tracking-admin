@@ -33,6 +33,7 @@ $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS devi
 
     <script>
         var map = L.map('mapid').setView(new L.LatLng(0.4654061, 101.4522179), 13);
+        map.attributionControl.setPrefix(false);
         var tracking_data = []; // Data nya akan di isi dari app.js. Lihat RenderMarkers();
 
         // var map = L.map('mapid').setView([101.4522179, 0.4654061], 13);
