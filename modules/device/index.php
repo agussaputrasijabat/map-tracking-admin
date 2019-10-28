@@ -27,8 +27,7 @@ $queryStatement = $conn->query("SELECT * FROM devices");
                     <tr>
                         <td><?= $device->rfid ?></td>
                         <td><?= $device->name ?></td>
-                        <td><?= $device->balance ?></td>
-                        <td><?= $device->balance ?></td>
+                        <td>Rp.<?= $device->balance ?></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-secondary btn-edit-device" data-id="<?= $device->device_id ?>">Ubah</button>
                         </td>

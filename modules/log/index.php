@@ -45,6 +45,9 @@ INNER JOIN locations ON device_log.location_id=locations.location_id WHERE devic
                 <tr>
                     <th scope="col">Device</th>
                     <th scope="col">Location</th>
+                    <th scope="col">Jarak</th>
+                    <th scope="col">Harga</th>
+                    <th scope="col">Sisa Saldo</th>
                     <th scope="col">Date</th>
                 </tr>
             </thead>
@@ -53,6 +56,9 @@ INNER JOIN locations ON device_log.location_id=locations.location_id WHERE devic
                     <tr>
                         <td><?= $log['device_name'] ?></td>
                         <td><?= $log['location_name'] ?></td>
+                        <td><?= $log['distance'] ?> KM</td>
+                        <td>Rp.<?= $log['price'] ?></td>
+                        <td>Rp.<?= $log['balance'] ?></td>
                         <td><?= $log['datetime'] ?></td>
                     </tr>
                 <?php endwhile; ?>

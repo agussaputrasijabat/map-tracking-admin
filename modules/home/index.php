@@ -10,6 +10,7 @@
             <p class="lead text-muted">Selamat datang di Map Tracking kendaraan.</p>
             <p>
                 <a href="?module=live" class="btn btn-primary my-2">Live Tracking</a>
+                <a href="?module=log" class="btn btn-primary my-2">Riwayat Kendaraan</a>
             </p>
         </div>
     </section>
