@@ -5,7 +5,7 @@ include '../../db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     extract($_POST);
-    $save = $conn->query("UPDATE devices SET rfid='$rfid', name='$name', balance=$balance WHERE device_id=$device_id");
+    $save = $conn->query("UPDATE devices SET rfid='$rfid', name='$name' WHERE device_id=$device_id");
     echo json_encode(array("success" => $save));
     exit;
 }
@@ -34,10 +34,10 @@ $device = $queryStatement->fetch_object();
                 <label for="exampleInputEmail1">Nama</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?= $device->name ?>">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="exampleInputEmail1">Saldo</label>
                 <input type="number" step="any" class="form-control" id="balance" name="balance" value="<?= $device->balance ?>">
-            </div>
+            </div> -->
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
     </div>

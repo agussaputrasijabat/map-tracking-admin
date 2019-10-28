@@ -29,6 +29,7 @@ $queryStatement = $conn->query("SELECT * FROM devices");
                         <td><?= $device->name ?></td>
                         <td>Rp.<?= $device->balance ?></td>
                         <td>
+                            <button type="button" class="btn btn-sm btn-outline-secondary btn-add-balance" data-id="<?= $device->device_id ?>">Tambah Saldo</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary btn-edit-device" data-id="<?= $device->device_id ?>">Ubah</button>
                         </td>
                     </tr>
@@ -57,6 +58,15 @@ $queryStatement = $conn->query("SELECT * FROM devices");
         e.preventDefault();
         var device_id = $(this).data('id');
         $.get('modules/device/edit.php?device_id=' + device_id, function(res) {
+            $('#device-modal .modal-dialog').html(res);
+            $('#device-modal').modal('show');
+        });
+    })
+
+    $('.btn-add-balance').click(function(e) {
+        e.preventDefault();
+        var device_id = $(this).data('id');
+        $.get('modules/device/balance.php?device_id=' + device_id, function(res) {
             $('#device-modal .modal-dialog').html(res);
             $('#device-modal').modal('show');
         });
