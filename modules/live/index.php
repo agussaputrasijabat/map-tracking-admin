@@ -42,7 +42,7 @@ $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS devi
         // }).addTo(map);
 
         L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-            attribution: '&copy; 5 Orang Pendekar Pelita Indonesia'
+            attribution: '&copy; 5 Orang Pendekar Dari Pelita Indonesia'
         }).addTo(map);
 
         L.icon = function(options) {
