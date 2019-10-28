@@ -44,7 +44,7 @@ $device = $queryStatement->fetch_object();
   $(document).on('submit', '#form-balance-device', function(e) {
     e.preventDefault();
     var form = this;
-
+    Pace.start();
     $.post($(form).attr('action'), $(form).serialize(), function(res) {
       location.reload();
     });

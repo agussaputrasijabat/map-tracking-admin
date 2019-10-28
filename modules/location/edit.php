@@ -28,19 +28,19 @@ $location = $queryStatement->fetch_object();
             <input type="hidden" name="location_id" value="<?= $location->location_id ?>" />
             <div class="form-group">
                 <label for="exampleInputEmail1">Unique ID</label>
-                <input type="text" class="form-control" id="unique_id" name="unique_id" value="<?= $location->unique_id ?>">
+                <input type="text" class="form-control" id="unique_id" name="unique_id" value="<?= $location->unique_id ?>" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?= $location->name ?>">
+                <input type="text" class="form-control" id="name" name="name" value="<?= $location->name ?>" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Latitude</label>
-                <input type="text" class="form-control" id="latitude" name="latitude" value="<?= $location->latitude ?>">
+                <input type="text" class="form-control" id="latitude" name="latitude" value="<?= $location->latitude ?>" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Longitude</label>
-                <input type="text" class="form-control" id="longitude" name="longitude" value="<?= $location->longitude ?>">
+                <input type="text" class="form-control" id="longitude" name="longitude" value="<?= $location->longitude ?>" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -51,7 +51,7 @@ $location = $queryStatement->fetch_object();
     $(document).on('submit', '#form-edit-location', function(e) {
         e.preventDefault();
         var form = this;
-
+        Pace.start();
         $.post($(form).attr('action'), $(form).serialize(), function(res) {
             location.reload();
         });

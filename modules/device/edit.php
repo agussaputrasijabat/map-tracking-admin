@@ -28,11 +28,11 @@ $device = $queryStatement->fetch_object();
             <input type="hidden" name="device_id" value="<?= $device->device_id ?>" />
             <div class="form-group">
                 <label for="exampleInputEmail1">RFID</label>
-                <input type="text" class="form-control" id="rfid" name="rfid" value="<?= $device->rfid ?>">
+                <input type="text" class="form-control" id="rfid" name="rfid" value="<?= $device->rfid ?>" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?= $device->name ?>">
+                <input type="text" class="form-control" id="name" name="name" value="<?= $device->name ?>" required>
             </div>
             <!-- <div class="form-group">
                 <label for="exampleInputEmail1">Saldo</label>
@@ -47,7 +47,7 @@ $device = $queryStatement->fetch_object();
     $(document).on('submit', '#form-edit-device', function(e) {
         e.preventDefault();
         var form = this;
-
+        Pace.start();
         $.post($(form).attr('action'), $(form).serialize(), function(res) {
             location.reload();
         });

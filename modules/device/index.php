@@ -30,6 +30,7 @@ $queryStatement = $conn->query("SELECT * FROM devices");
                         <td>Rp.<?= $device->balance ?></td>
                         <td>
                             <button type="button" class="btn btn-sm btn-outline-secondary btn-add-balance" data-id="<?= $device->device_id ?>">Tambah Saldo</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary btn-reset-balance" data-id="<?= $device->device_id ?>">Reset Saldo</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary btn-edit-device" data-id="<?= $device->device_id ?>">Ubah</button>
                         </td>
                     </tr>
@@ -48,6 +49,7 @@ $queryStatement = $conn->query("SELECT * FROM devices");
 <script>
     $('.btn-add-device').click(function(e) {
         e.preventDefault();
+        Pace.start();
         $.get('modules/device/add.php', function(res) {
             $('#device-modal .modal-dialog').html(res);
             $('#device-modal').modal('show');
@@ -56,6 +58,7 @@ $queryStatement = $conn->query("SELECT * FROM devices");
 
     $('.btn-edit-device').click(function(e) {
         e.preventDefault();
+        Pace.start();
         var device_id = $(this).data('id');
         $.get('modules/device/edit.php?device_id=' + device_id, function(res) {
             $('#device-modal .modal-dialog').html(res);
@@ -65,10 +68,22 @@ $queryStatement = $conn->query("SELECT * FROM devices");
 
     $('.btn-add-balance').click(function(e) {
         e.preventDefault();
+        Pace.start();
         var device_id = $(this).data('id');
         $.get('modules/device/balance.php?device_id=' + device_id, function(res) {
             $('#device-modal .modal-dialog').html(res);
             $('#device-modal').modal('show');
+        });
+    })
+
+    $('.btn-reset-balance').click(function(e) {
+        e.preventDefault();
+        var device_id = $(this).data('id');
+        Pace.start();
+        $.post('modules/device/reset-balance.php', {
+            device_id: device_id
+        }, function(res) {
+            location.reload();
         });
     })
 </script>

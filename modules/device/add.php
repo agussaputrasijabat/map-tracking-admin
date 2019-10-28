@@ -24,15 +24,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="form-add-device" action="modules/device/add.php" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="exampleInputEmail1">RFID</label>
-                <input type="text" class="form-control" id="rfid" name="rfid">
+                <input type="text" class="form-control" id="rfid" name="rfid" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Saldo</label>
-                <input type="number" step="any" class="form-control" id="balance" name="balance">
+                <input type="number" step="any" class="form-control" id="balance" name="balance" value="0" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $(document).on('submit', '#form-add-device', function(e) {
         e.preventDefault();
         var form = this;
-
+        Pace.start();
         $.post($(form).attr('action'), $(form).serialize(), function(res) {
             location.reload();
         });

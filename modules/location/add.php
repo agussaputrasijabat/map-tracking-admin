@@ -23,19 +23,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form id="form-add-location" action="modules/location/add.php" method="post" autocomplete="off">
             <div class="form-group">
                 <label for="exampleInputEmail1">Unique ID</label>
-                <input type="text" class="form-control" id="unique_id" name="unique_id">
+                <input type="text" class="form-control" id="unique_id" name="unique_id" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Nama</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Latitude</label>
-                <input type="number" step="any" class="form-control" id="latitude" name="latitude">
+                <input type="number" step="any" class="form-control" id="latitude" name="latitude" required>
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Longitude</label>
-                <input type="number" step="any" class="form-control" id="longitude" name="longitude">
+                <input type="number" step="any" class="form-control" id="longitude" name="longitude" required>
             </div>
             <button type="submit" class="btn btn-primary">Simpan</button>
         </form>
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $(document).on('submit', '#form-add-location', function(e) {
         e.preventDefault();
         var form = this;
-
+        Pace.start();
         $.post($(form).attr('action'), $(form).serialize(), function(res) {
             location.reload();
         });

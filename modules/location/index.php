@@ -49,6 +49,7 @@ $queryStatement = $conn->query("SELECT * FROM locations");
 <script>
     $('.btn-add-location').click(function(e) {
         e.preventDefault();
+        Pace.start();
         $.get('modules/location/add.php', function(res) {
             $('#location-modal .modal-dialog').html(res);
             $('#location-modal').modal('show');
@@ -57,6 +58,7 @@ $queryStatement = $conn->query("SELECT * FROM locations");
 
     $('.btn-edit-location').click(function(e) {
         e.preventDefault();
+        Pace.start();
         var location_id = $(this).data('id');
         $.get('modules/location/edit.php?location_id=' + location_id, function(res) {
             $('#location-modal .modal-dialog').html(res);
