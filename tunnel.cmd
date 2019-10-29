@@ -1,1 +1,1 @@
- ssh -R 80:localhost:6983 ssh.localhost.run
+ssh -R 80:localhost:6983 ssh.localhost.run

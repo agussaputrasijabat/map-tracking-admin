@@ -110,6 +110,13 @@ function checkActiveMenu($menu_name, $module)
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link <?php checkActiveMenu('notification', $module); ?>" href="?module=notification">
+                                <span data-feather="file-text"></span>
+                                Notifikasi
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link <?php checkActiveMenu('log', $module); ?>" href="?module=log">
                                 <span data-feather="file-text"></span>
                                 Riwayat Kendaraan

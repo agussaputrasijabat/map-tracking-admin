@@ -22,8 +22,9 @@ $device_id = $_GET['device_id'] ?? 0;
 $currentDevice = array();
 $queryState = $conn->query("SELECT * FROM devices");
 while ($device = $queryState->fetch_assoc()) {
+    $device_locations = search($locations, 'location_id', $device['location_id']);
     $device['route'] = search($routes, 'device_id', $device['device_id'])[0];
-    $device['location'] = search($locations, 'location_id', $device['location_id'])[0];
+    $device['location'] = (!empty($device_locations) ? $device_locations[0] : array());
     array_push($devices, $device);
     if ($device['device_id'] == $device_id) {
         $currentDevice = $device;

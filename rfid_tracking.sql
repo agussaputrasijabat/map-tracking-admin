@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Okt 2019 pada 04.40
--- Versi server: 10.1.38-MariaDB
--- Versi PHP: 7.3.3
+-- Generation Time: Oct 28, 2019 at 01:52 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `devices`
+-- Table structure for table `devices`
 --
 
 DROP TABLE IF EXISTS `devices`;
@@ -40,17 +40,18 @@ CREATE TABLE `devices` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `devices`
+-- Dumping data for table `devices`
 --
 
 INSERT INTO `devices` (`device_id`, `location_id`, `rfid`, `name`, `balance`, `created_at`, `updated_at`) VALUES
-(1, 3, '0008166538', 'BH1234BD', 5000, '2019-10-17 10:59:16', '2019-10-26 14:06:01'),
-(2, 1, '0005397421', 'BH4567BC', 1000000, '2019-10-26 05:02:00', '2019-10-26 14:05:38');
+(1, 2, '0008166538', 'BH 1234 BD', 83860, '2019-10-17 10:59:16', '2019-10-27 06:39:43'),
+(2, 2, '0005397421', 'BH 4567 BC', 983860, '2019-10-26 05:02:00', '2019-10-27 06:46:34'),
+(6, 3, '0000418278', 'BM 5838 CK', 100280, '2019-10-28 04:39:35', '2019-10-28 12:15:26');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `device_log`
+-- Table structure for table `device_log`
 --
 
 DROP TABLE IF EXISTS `device_log`;
@@ -65,16 +66,21 @@ CREATE TABLE `device_log` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `device_log`
+-- Dumping data for table `device_log`
 --
 
 INSERT INTO `device_log` (`device_log_id`, `device_id`, `location_id`, `distance`, `price`, `balance`, `datetime`) VALUES
-(271, 1, 1, 10.5, 8900, 100000, '2019-10-28 02:49:14');
+(271, 1, 1, 10.5, 8900, 100000, '2019-10-28 02:49:14'),
+(272, 1, 1, 0, 0, -19720, '2019-10-28 10:35:47'),
+(273, 2, 1, 0, 0, 1000000, '2019-10-28 10:35:50'),
+(274, 2, 2, 5.38, 16140, 983860, '2019-10-27 06:46:34'),
+(275, 1, 2, 5.38, 16140, 83860, '2019-10-27 06:39:43'),
+(276, 6, 3, 8.24, 24720, 75280, '2019-10-28 12:15:26');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `locations`
+-- Table structure for table `locations`
 --
 
 DROP TABLE IF EXISTS `locations`;
@@ -87,19 +93,40 @@ CREATE TABLE `locations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `locations`
+-- Dumping data for table `locations`
 --
 
 INSERT INTO `locations` (`location_id`, `unique_id`, `name`, `latitude`, `longitude`) VALUES
-(1, '950726089', 'Watch Tower  1', 0.474736, 101.4405126),
-(2, '966483842', 'Watch Tower  2', 0.463417, 101.393482),
-(3, '935482823', 'Watch Tower  3', 0.50128, 101.509621),
-(4, '993481283', 'Watch Tower  4', 0.415278, 101.43357);
+(1, '3493810227', 'Watch Tower Eddy', 0.474736, 101.4405126),
+(2, '3397137144', 'Watch Tower  Tomo', 0.463417, 101.393482),
+(3, '1585764841', 'Watch Tower Ferdy', 0.50128, 101.509621),
+(4, '950726089', 'Watch Tower Agus', 0.415278, 101.43357);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `routes`
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+CREATE TABLE `notifications` (
+  `notification_id` int(11) NOT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `content` varchar(1000) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `location_id`, `content`) VALUES
+(4, 1, 'Welcome to Map Tracking!'),
+(5, 2, 'Hai Tomo, terima kasih telah menggunakan layanan kami! ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `routes`
 --
 
 DROP TABLE IF EXISTS `routes`;
@@ -111,69 +138,82 @@ CREATE TABLE `routes` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `routes`
+-- Dumping data for table `routes`
 --
 
 INSERT INTO `routes` (`route_id`, `device_id`, `location_from_id`, `location_to_id`) VALUES
 (7, 1, 1, 3),
-(8, 2, 3, 1);
+(8, 2, 1, 2),
+(9, 6, 3, 4);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `devices`
+-- Indexes for table `devices`
 --
 ALTER TABLE `devices`
   ADD PRIMARY KEY (`device_id`);
 
 --
--- Indeks untuk tabel `device_log`
+-- Indexes for table `device_log`
 --
 ALTER TABLE `device_log`
   ADD PRIMARY KEY (`device_log_id`);
 
 --
--- Indeks untuk tabel `locations`
+-- Indexes for table `locations`
 --
 ALTER TABLE `locations`
   ADD PRIMARY KEY (`location_id`),
   ADD UNIQUE KEY `unique_id` (`unique_id`);
 
 --
--- Indeks untuk tabel `routes`
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`);
+
+--
+-- Indexes for table `routes`
 --
 ALTER TABLE `routes`
   ADD PRIMARY KEY (`route_id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `devices`
+-- AUTO_INCREMENT for table `devices`
 --
 ALTER TABLE `devices`
-  MODIFY `device_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `device_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `device_log`
+-- AUTO_INCREMENT for table `device_log`
 --
 ALTER TABLE `device_log`
-  MODIFY `device_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=272;
+  MODIFY `device_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=277;
 
 --
--- AUTO_INCREMENT untuk tabel `locations`
+-- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
   MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `routes`
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `routes`
 --
 ALTER TABLE `routes`
-  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `route_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

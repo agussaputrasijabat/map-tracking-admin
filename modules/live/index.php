@@ -66,7 +66,7 @@ $devicesLocations = $conn->query("SELECT devices.device_id, devices.name AS devi
             e.preventDefault();
             Pace.start();
             selected_device = $(this).data('id');
-            RenderMarkers(selected_device);
+            RenderMarkers(selected_device, true);
             $('.device').removeClass('active');
             $(this).addClass('active');
         })

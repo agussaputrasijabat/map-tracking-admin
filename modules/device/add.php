@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Content-Type: application/json');
     extract($_POST);
     $dt = date("Y-m-d H:i:s");
-    $save = $conn->query("INSERT INTO devices VALUES (null, null,'$rfid', '$name', $balance, '$dt', '$dt')");
+    $save = $conn->query("INSERT INTO devices VALUES (null, 1,'$rfid', '$name', $balance, '$dt', '$dt')");
     echo json_encode(array("success" => $save));
     exit;
 }
